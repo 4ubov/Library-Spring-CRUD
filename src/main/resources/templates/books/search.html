@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search book</title>
+</head>
+<body>
+
+<div class="frame">
+
+    <form th:method="GET" th:action="@{/books/search}">
+        <label for="startString">Введите название книги: </label>
+        <input th:type="text" id="startString" th:name="startString">
+        <br/>
+        <input type="submit" class="button" value="Найти книгу">
+    </form>
+
+    <div th:if="${books}">
+
+        <div th:if="${books.size()==0}">
+            <br>
+            <p>Книг не найдено</p>
+            <br>
+        </div>
+
+        <div th:each="book : ${books}">
+            <br>
+            <a th:href="@{/books/{book_id}(book_id=${book.getBookId()})}"
+               th:text="${book.getTitle() + ', ' + book.getAuthor() + ', ' + book.getRealiseDate()}">BookInfo</a>
+
+            <div th:if="${book.getOwner()}">
+                <a th:href="@{/people/{person_id}(person_id=${book.getOwner().getPersonId()})}" th:text="'Книга сейчас у: ' + ${book.getOwner().getFullName()}">Owner</a>
+            </div>
+
+            <div th:unless="${book.getOwner()}">
+                <p th:text="'Книга свободна'">NotOwned</p>
+            </div>
+            <br>
+        </div>
+
+    </div>
+
+    <hr/>
+    <div class="btn-group">
+        <div class="button">
+            <a th:href="@{/people}">Все читатели</a>
+        </div>
+        <div class="button">
+            <a th:href="@{/books}">Все книги</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

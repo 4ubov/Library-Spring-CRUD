@@ -1,0 +1,12 @@
+# Data Source Settings
+spring.datasource.driver-class-name=
+spring.datasource.url=
+spring.datasource.username=
+spring.datasource.password=
+
+# Hibernate Settings
+spring.jpa.properties.hibernate.dialect=
+spring.jpa.properties.hibernate.show_sql=
+
+# Filter for http methods PUT, PATCH, DELETE
+spring.mvc.hiddenmethod.filter.enabled=
